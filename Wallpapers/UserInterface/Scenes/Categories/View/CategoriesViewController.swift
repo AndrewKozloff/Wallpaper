@@ -29,6 +29,7 @@ final class CategoriesViewController: UIViewController, CategoriesViewInput {
 		collection.backgroundColor = .white
 		collection.delegate = self
 		collection.dataSource = self
+		collection.showsVerticalScrollIndicator = false
 		collection.translatesAutoresizingMaskIntoConstraints = false
 		collection.register(cell: CategoryCollectionViewCell.self)
 		return collection
@@ -43,7 +44,7 @@ final class CategoriesViewController: UIViewController, CategoriesViewInput {
 
     func setupInitialState() {
 		view.backgroundColor = .white
-		
+		title = "Categories"
 		view.addSubview(collectionView)
 		
 		NSLayoutConstraint.activate([

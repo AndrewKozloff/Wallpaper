@@ -20,9 +20,11 @@ class CategoryCollectionViewCell: UICollectionViewCell {
 	
 	override init(frame: CGRect) {
 		super.init(frame: frame)
-		
+
 		contentView.backgroundColor(.white)
-			.addShadow(offset: CGSize(width: 0, height: 5))
+			.shadowColor(.black)
+			.shadowRadius(10)
+			.shadowOpacity(0.4)
 			.rounded(radius: 12)
 		
 		contentView.addSubview(titleLabel)
@@ -36,6 +38,11 @@ class CategoryCollectionViewCell: UICollectionViewCell {
 	
 	required init?(coder: NSCoder) {
 		fatalError("init(coder:) has not been implemented")
+	}
+	
+	override func layoutSubviews() {
+		super.layoutSubviews()
+		contentView.layer.shadowPath = UIBezierPath(rect: contentView.bounds.offsetBy(dx: 0, dy: 5)).cgPath
 	}
 	
 	func fill(with model: CategoryModel) {

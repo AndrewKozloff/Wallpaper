@@ -61,6 +61,24 @@ extension UIView {
 		layer.shadowRadius = radius
 		return self
 	}
+	
+	@discardableResult
+	func shadowColor(_ color: UIColor) -> Self {
+		layer.shadowColor = color.cgColor
+		return self
+	}
+	
+	@discardableResult
+	func shadowRadius(_ radius: CGFloat) -> Self {
+		layer.shadowRadius = radius
+		return self
+	}
+	
+	@discardableResult
+	func shadowOpacity(_ opacity: Float) -> Self {
+		layer.shadowOpacity = opacity
+		return self
+	}
 }
 
 extension UIView {
