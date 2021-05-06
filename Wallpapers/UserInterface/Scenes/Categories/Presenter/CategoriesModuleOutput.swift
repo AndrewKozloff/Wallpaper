@@ -7,7 +7,7 @@
 //
 
 enum CategoriesOutputState {
-	case next
+	case category(id: Int)
 }
 
 protocol CategoriesModuleOutput: class {

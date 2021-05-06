@@ -1,5 +1,5 @@
 //
-//  CategoriesViewOutput.swift
+//  PhotosViewOutput.swift
 //  Wallpapers
 //
 //  Created by Andrew Kozlov on 06/05/2021.
@@ -8,11 +8,11 @@
 
 import Foundation
 
-protocol CategoriesViewOutput {
+protocol PhotosViewOutput {
     /// Notify presenter that view is ready
     func viewLoaded()
 	var numberOfSections: Int { get }
 	func numberOfItems(in section: Int) -> Int
-	func categoryForItem(at indexPath: IndexPath) -> CategoryCellModel
+	func photoForItem(at indexPath: IndexPath) -> PhotoCellModel
 	func didSelectCategory(at indexPath: IndexPath)
 }

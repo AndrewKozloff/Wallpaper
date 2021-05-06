@@ -9,6 +9,8 @@ import UIKit
 
 class CategoryCollectionViewCell: UICollectionViewCell {
 	
+	private lazy var gradientLayer = CAGradientLayer()
+	
 	private lazy var titleLabel: UILabel = {
 		let label = UILabel()
 		label.font = .boldSystemFont(ofSize: 12)
@@ -27,7 +29,12 @@ class CategoryCollectionViewCell: UICollectionViewCell {
 			.shadowOpacity(0.4)
 			.rounded(radius: 12)
 		
-		contentView.addSubview(titleLabel)
+		gradientLayer.colors = [UIColor.systemGray2.cgColor, UIColor.white.cgColor]
+		contentView.layer.addSublayer(gradientLayer)
+		
+		contentView.addSubviews(
+			titleLabel
+		)
 		
 		NSLayoutConstraint.activate([
 			titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
@@ -43,9 +50,10 @@ class CategoryCollectionViewCell: UICollectionViewCell {
 	override func layoutSubviews() {
 		super.layoutSubviews()
 		contentView.layer.shadowPath = UIBezierPath(rect: contentView.bounds.offsetBy(dx: 0, dy: 5)).cgPath
+		gradientLayer.frame = contentView.bounds
 	}
 	
-	func fill(with model: CategoryModel) {
+	func fill(with model: CategoryCellModel) {
 		titleLabel.text = model.name
 	}
 }

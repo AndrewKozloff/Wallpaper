@@ -6,8 +6,14 @@
 //  Copyright © 2021 Wallpapers. All rights reserved.
 //
 
+enum CategoriesViewState {
+	case initial
+	case loading
+	case success
+	case failure
+}
+
 protocol CategoriesViewInput: class {
     /// Method for setup initial state of view
-    func setupInitialState()
-	func reloadData()
+	var state: CategoriesViewState { get set }
 }

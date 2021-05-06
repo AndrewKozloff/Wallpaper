@@ -1,5 +1,5 @@
 //
-//  CategoriesViewController.swift
+//  PhotosViewController.swift
 //  Wallpapers
 //
 //  Created by Andrew Kozlov on 06/05/2021.
@@ -8,30 +8,29 @@
 
 import UIKit
 
-final class CategoriesViewController: UIViewController, CategoriesViewInput {
+final class PhotosViewController: UIViewController, PhotosViewInput {
 
     // MARK: - Properties
 
-    var output: CategoriesViewOutput!
+    var output: PhotosViewOutput!
 
     // MARK: - UIViewController
 	
 	private lazy var collectionLayout: UICollectionViewFlowLayout = {
 		let layout = UICollectionViewFlowLayout()
-		layout.minimumInteritemSpacing = 10
-		layout.minimumLineSpacing = 24
+		layout.minimumInteritemSpacing = 0
+		layout.minimumLineSpacing = 0
 		return layout
 	}()
 	
 	private lazy var collectionView: UICollectionView = {
 		let collection = UICollectionView(frame: .zero, collectionViewLayout: collectionLayout)
-		collection.contentInset = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
 		collection.backgroundColor = .white
 		collection.delegate = self
 		collection.dataSource = self
 		collection.showsVerticalScrollIndicator = false
 		collection.translatesAutoresizingMaskIntoConstraints = false
-		collection.register(cell: CategoryCollectionViewCell.self)
+		collection.register(cell: PhotoCollectionViewCell.self)
 		return collection
 	}()
 
@@ -40,9 +39,9 @@ final class CategoriesViewController: UIViewController, CategoriesViewInput {
         output?.viewLoaded()
     }
 
-    // MARK: - CategoriesViewInput
+    // MARK: - PhotosViewInput
 	
-	var state: CategoriesViewState = .initial {
+	var state: PhotosViewState = .initial {
 		didSet {
 			switch state {
 			case .initial:
@@ -57,9 +56,9 @@ final class CategoriesViewController: UIViewController, CategoriesViewInput {
 		}
 	}
 
-    private func showInitialState() {
+	private func showInitialState() {
 		view.backgroundColor = .white
-		title = "Categories"
+		title = "Photos"
 		view.addSubview(collectionView)
 		
 		NSLayoutConstraint.activate([
@@ -68,7 +67,7 @@ final class CategoriesViewController: UIViewController, CategoriesViewInput {
 			collectionView.rightAnchor.constraint(equalTo: view.rightAnchor),
 			collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
 		])
-    }
+	}
 	
 	private func showLoadingState() {
 		view.showActivity()
@@ -82,23 +81,22 @@ final class CategoriesViewController: UIViewController, CategoriesViewInput {
 	private func showFailureState() {
 		view.hideActivity()
 	}
+
 }
 
 // MARK: - UICollectionViewDelegateFlowLayout
 
-extension CategoriesViewController: UICollectionViewDelegateFlowLayout {
+extension PhotosViewController: UICollectionViewDelegateFlowLayout {
 	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-		let padding = collectionView.contentInset.left + collectionView.contentInset.right
-		let spacing: CGFloat = 10
- 		let width = (collectionView.bounds.size.width - padding - spacing) / 2
-		let height = width * 1.5
+		let width = (collectionView.bounds.size.width) / 3
+		let height = width
 		return CGSize(width: width, height: height)
 	}
 }
 
 // MARK: - UICollectionViewDelegate
 
-extension CategoriesViewController: UICollectionViewDelegate {
+extension PhotosViewController: UICollectionViewDelegate {
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 		output.didSelectCategory(at: indexPath)
 	}
@@ -106,7 +104,7 @@ extension CategoriesViewController: UICollectionViewDelegate {
 
 // MARK: - UICollectionViewDataSource
 
-extension CategoriesViewController: UICollectionViewDataSource {
+extension PhotosViewController: UICollectionViewDataSource {
 	
 	func numberOfSections(in collectionView: UICollectionView) -> Int {
 		output.numberOfSections
@@ -117,8 +115,8 @@ extension CategoriesViewController: UICollectionViewDataSource {
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-		let cell: CategoryCollectionViewCell = collectionView.dequeueCell(for: indexPath)
-		cell.fill(with: output.categoryForItem(at: indexPath))
+		let cell: PhotoCollectionViewCell = collectionView.dequeueCell(for: indexPath)
+		cell.fill(with: output.photoForItem(at: indexPath))
 		return cell
 	}
 }
