@@ -24,7 +24,7 @@ final class SettingsViewController: UIViewController, SettingsViewInput {
     // MARK: - SettingsViewInput
 
     func setupInitialState() {
-
+		view.backgroundColor = .systemIndigo
     }
 
 }

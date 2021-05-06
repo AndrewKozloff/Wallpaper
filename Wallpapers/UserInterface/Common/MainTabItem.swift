@@ -23,17 +23,22 @@ enum MainTabItem: Int, CaseIterable {
 		}
 	}
 
-	var image: UIImage {
+	var image: UIImage? {
 		switch self {
 		case .categories:
-			return UIImage()
+			return UIImage(systemName: "photo.on.rectangle")
 		case .settings:
-			return UIImage()
+			return UIImage(systemName: "person.crop.circle")
 		}
 	}
 
-	var selectedImage: UIImage {
-		return image
+	var selectedImage: UIImage? {
+		switch self {
+		case .categories:
+			return UIImage(systemName: "photo.on.rectangle.fill")
+		case .settings:
+			return UIImage(systemName: "person.crop.circle.fill")
+		}
 	}
 	
 	var idendifier: String {

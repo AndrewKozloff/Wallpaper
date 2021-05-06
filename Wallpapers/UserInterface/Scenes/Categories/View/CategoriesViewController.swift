@@ -24,7 +24,7 @@ final class CategoriesViewController: UIViewController, CategoriesViewInput {
     // MARK: - CategoriesViewInput
 
     func setupInitialState() {
-
+		view.backgroundColor = .systemOrange
     }
 
 }
