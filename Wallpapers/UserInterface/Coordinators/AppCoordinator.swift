@@ -28,9 +28,9 @@ class AppCoordinator: Coordinator {
 extension AppCoordinator: MainCoordinatorOutput {
 	
 	private func performMainFlow() {
-		let navigationController = UINavigationController()
-		window.rootViewController = navigationController
-		let coordinator = MainCoordinator(navigationController: navigationController)
+		let tabBarController = MainTabBarController()
+		window.rootViewController = tabBarController
+		let coordinator = MainCoordinator(tabBarController: tabBarController)
 		coordinator.output = self
 		addDependency(coordinator)
 		coordinator.start()
