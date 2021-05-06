@@ -1,0 +1,24 @@
+### Headers settings
+company: Wallpapers
+
+### Xcode project settings
+project_name: Wallpapers
+xcodeproj_path: Wallpapers.xcodeproj
+
+### Code generation settings section
+# The main project target name
+project_target: Wallpapers
+
+# The file path for new modules
+project_file_path: Wallpapers/UserInterface/Scenes
+
+# The Xcode group path to new modules
+project_group_path: Wallpapers/UserInterface/Scenes
+
+# Catalogs
+catalogs:
+- 'https://github.com/AndrewKozloff/mvp-templates'
+
+### Templates
+templates:
+- {name: mvp}
