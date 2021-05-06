@@ -45,12 +45,12 @@ extension MainCoordinator: UITabBarControllerDelegate {
 		case .categories:
 			performCategoriesFlow()
 		case .settings:
-			break
+			performSettingsFlow()
 		}
 	}
 }
 
-// MARK: - CategoriesModuleOutput
+// MARK: - CategoriesCoordinatorOutput
 
 extension MainCoordinator: CategoriesCoordinatorOutput {
 	
@@ -64,6 +64,25 @@ extension MainCoordinator: CategoriesCoordinatorOutput {
 	}
 	
 	func finish(coordinator: CategoriesCoordinator, state: CategoriesCoordinatorOutputState) {
+		removeDependency(coordinator)
+		start()
+	}
+}
+
+// MARK: - SettingsCoordinatorOutput
+
+extension MainCoordinator: SettingsCoordinatorOutput {
+	
+	func performSettingsFlow() {
+		let navigationController = tabBarController.navigationController(of: .settings)
+		guard navigationController.viewControllers.isEmpty else { return }
+		let coordinator = SettingsCoordinator(navigationController: navigationController)
+		coordinator.output = self
+		addDependency(coordinator)
+		coordinator.start()
+	}
+	
+	func finish(coordinator: SettingsCoordinator, state: SettingsCoordinatorOutputState) {
 		removeDependency(coordinator)
 		start()
 	}
