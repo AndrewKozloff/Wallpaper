@@ -45,7 +45,7 @@ extension CategoriesCoordinator: CategoriesModuleOutput {
 	func finish(module: CategoriesModuleInput, with state: CategoriesOutputState) {
 		switch state {
 		case .category(let id):
-			showCategories(with: id)
+			showPhotos(with: id)
 		}
 	}
 }
@@ -54,7 +54,7 @@ extension CategoriesCoordinator: CategoriesModuleOutput {
 
 extension CategoriesCoordinator: PhotosModuleOutput {
 	
-	func showCategories(with id: Int) {
+	func showPhotos(with id: Int) {
 		let (view, _) = PhotosModuleConfigurator().configure(output: self, albumId: id)
 		navigationController.pushViewController(view, animated: true)
 	}

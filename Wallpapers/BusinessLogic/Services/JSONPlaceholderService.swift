@@ -9,7 +9,12 @@ import Moya
 
 class JSONPlaceholderService {
 	
-	private let provider = MoyaProvider<JSONPlaceholderAPI>()
+	private let provider: MoyaProvider<JSONPlaceholderAPI>
+	
+	init() {
+		let logger = NetworkLoggerPlugin()
+		provider = MoyaProvider<JSONPlaceholderAPI>(plugins: [logger])
+	}
 	
 	func getAlbums(completion: @escaping (Result<[AlbumModel], Error>) -> Void) {
 		provider.request(.albums) { (result) in

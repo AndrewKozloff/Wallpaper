@@ -58,7 +58,7 @@ final class PhotosPresenter: PhotosViewOutput, PhotosModuleInput {
 			switch result {
 			case .success(let response):
 				self.photos = response.map {
-					PhotoCellModel(imageUrlPath: $0.url)
+					PhotoCellModel(imageUrlPath: $0.thumbnailUrl)
 				}
 				self.view?.state = .success
 			case .failure(let error):
